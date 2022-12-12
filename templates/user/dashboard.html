@@ -1,0 +1,40 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static 'user/dashboard.css'%}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Dashboard</title>
+</head>
+<body>
+    <div class="container">
+    <h2>Hey, {{request.user.username}} !</h2>
+    <br><br>
+    <div class="box">
+        <div class="bill">
+            {{Payment_string}}  
+        </div>
+        <div class="vertical-line"></div>
+        <div class="info">
+            
+        {% if slot == -1 %}
+        <h2>Make Payment for selecting one slot.</h2>
+        <div class="make_payment">
+            <a href = "../payment">Make Payment</a>
+        </div>
+        {%else%}
+        <h2>Your slot for Yoga classes is : <span style = "font-weight: bold; color: #12809b">{%if slot == 1%} 6-7AM {%endif%} {%if slot == 2%} 7-8AM {%endif%} {%if slot == 3%} 8-9AM {%endif%} {%if slot == 4%} 5-6PM {%endif%}</h2>
+            {%endif%}</span>
+    </div>
+    </div>
+<h3>You need to make payment again in <span style = "color: red;">{{diff}}</span> days.</h3>
+    <div class="sign-out"><a href="../signout"><i class='bx bx-log-out'></i></a></div>
+    </div>
+    <div class="right_panel">
+        <img src="{%static 'user/undraw_feeling_proud_qne1.svg'%}" alt="">
+    </div>
+</body>
+</html>

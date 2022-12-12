@@ -1,0 +1,286 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+ body{
+     margin: 0;
+    
+ }
+ .container{
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.container::before{
+content: '';
+position: absolute;
+width: 2000px;
+height: 2000px;
+border-radius: 50%;
+background: linear-gradient(-45deg,#00c6a7,#4362e8);
+top: -10%;
+left: 48%;
+transform: translateY(-50%);
+}
+.content-section{
+    position: absolute;
+left: 4%;
+    border-radius: 4px;
+    width: 40%; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+.box{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    top: 0;
+    bottom: 0;
+    margin: 0;
+    background: white;
+    
+    
+    
+}
+.box h1{
+    margin: 0;
+    font-size: 3.1rem;
+    color: black;
+    font-weight: bolder;
+}
+
+.form_method{
+    width: 100%;
+}
+.form-group{
+    border: none;
+   margin: 0;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   
+   
+   width: 100%;
+   
+}
+.bottom_error{
+    margin-bottom: 3px;
+}
+.centre{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.for_input{
+    width: 71%;
+}
+.input_user{
+    display: flex;
+    align-items: center;
+    padding: 11px 1.4rem;
+    background: #f0f0f0;
+    border-radius: 2px;
+    margin-top: 18px;
+}
+.input_user i{
+    margin-right: 5px;
+    color: #acacac;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+.input_user input{
+    outline: none;
+    border: none;
+    width: 100%;
+    background: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    
+}
+.sign{
+    width: 71%;
+}
+
+.btn-outline-info{
+width: 100%;
+    padding: 3%;
+    outline: none;
+    
+    margin-top: 8%;
+    border-radius: 2px;
+    border: none;
+    background: #278ccd;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all 1.5s ease; 
+}
+ .btn-outline-info:hover{
+    background: #65acda;
+}
+ .right_panel{
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+  
+}
+img{
+    width: 90%;
+    height: 45%;
+}
+.sign_in{
+   border: 2px solid;
+   width: 50%;
+   margin: auto;
+   margin-top: 10px;
+   padding-top: 5px;
+   padding-bottom: 5px;
+   transition: all 0.8s ease;
+}
+.sign_in:hover{
+background: #bfe4e4a1;
+}
+.form-group h2{
+    margin-top: 0 ;
+    margin-bottom: 12px;
+    color: blue;
+ font-weight: 100px ;
+ margin-left: 8%;
+}
+.requiredField{
+    font-weight: bold;
+}
+
+.form-control{
+    outline: none;
+    border: none;
+}
+.pt-3{
+  
+    font-weight: bolder;
+    color: white;
+}
+.pt-3 h3{
+    font-size: 1.8rem;
+    margin: 0;
+
+}
+.pt-3 p{
+    font-size: 1.2rem;
+    margin: 0;
+
+}
+.pt-3 a{
+    font-size: 0.8rem;
+    color: white;
+    margin-top: 11px;
+    text-decoration: none;
+
+}
+
+.instruction{
+    font-weight: lighter;
+   
+}
+#hide1{
+    display: none;
+}
+#hide12{
+    display: none;
+}
+@media (max-width:830px){
+.container::before{
+    width: 1153px;
+    height: 812px;
+    top: 3%;
+    left: -60%;
+    transform: translateY(50%);
+}
+.content-section{
+    left: 35%;
+    bottom: 35%;
+    width: 70%;
+}
+.box h1{
+    font-size: 1.8rem;
+}
+.btn-outline-info{
+    padding: 2%;
+    margin-top: 4%;
+}
+.right_panel{
+    width: 96%;
+    height: 35%;
+    top: 71%;
+    right: 0;
+    flex-direction: row;
+
+}
+.pt-3 h3{
+    font-size: 1.1rem;
+}
+.pt-3 p{
+    font-size: 0.9rem;
+}
+.input_user{
+    padding: 5px 1.4rem;
+    margin-top: 10px;
+}
+
+}
+@media (max-width:510px){
+img{
+    display: none;
+}
+.container::before{
+    border-radius: 0%;
+    top: -5%;
+}
+.content-section{
+    left: 1%;
+    width: 100%;
+    bottom: 45%;
+}
+.right_panel{
+    top: 74%;
+}
+.box{
+    width: 100%;
+}
+.box h1{
+    font-size: 1rem;
+}
+.for_input{
+    width: 100%;
+}
+.input_user{
+    padding: 5px 0.8rem;
+    margin-top: 10px;
+}
+.btn-outline-info{
+    padding: 1%;
+}
+.bottom_error{
+    margin-bottom: 0px;
+}
+
+}

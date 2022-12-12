@@ -1,0 +1,159 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static 'user/signup.css'%}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Signup</title>
+</head>
+<body class="u-body">
+    <div class="container">
+        <div class="content-section">
+            <div class="box">
+                <h1>Sign up now</h1>
+                {%for msg in msgs%}
+                    <h4 style="text-align: center;
+                    color: #0a9b9f;
+                    margin: 5px 0;">{{msg}}</h4><br>
+                {%endfor%}
+          <form method="POST" class="form_method">
+            {% csrf_token %}
+           <fieldset class="form-group bottom_error">
+              <div class="centre">
+                <div id="div_id_username" class="form-group">
+                  <div class="for_input">
+                    <div class="input_user">
+                      <i class='bx bxs-user'></i> <input type="text" name="name" maxlength="150" autofocus
+                        class="textinput textInput form-control" required id="id_username" placeholder="Username">
+  
+                    </div>
+                  </div>
+                </div>
+                <div id="div_id_username" class="form-group">
+                    <div class="for_input">
+                      <div class="input_user">
+                        <i class='bx bxs-user'></i> <input type="date" name="dob"required id="id_username">
+    
+                      </div>
+                    </div>
+                  </div>
+                <div id="div_id_email" class="form-group">
+  
+  
+                  <div class="for_input">
+                    <div class="input_user">
+  
+                      <i class='bx bxs-envelope'></i> <input type="email" name="email" class="emailinput form-control"
+                        required id="id_email" placeholder="Email">
+                    </div>
+                  </div>
+                </div>
+                <div id="div_id_password1" class="form-group">
+  
+                  <div class="for_input">
+                    <div class="input_user">
+  
+                      <i class='bx bxs-lock-alt'></i><input type="password" name="pass1"
+                        autocomplete="new-password" class="textinput textInput form-control" onkeydown="" required
+                        id="id_password1" placeholder="Password">
+                      <span class="eye" onclick="myFunction()">
+  
+  
+                        <i id="hide1" class="bi bi-eye-fill"></i>
+                        <i id="hide2" class="bi bi-eye-slash-fill"></i>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div id="div_id_password2" class="form-group"> 
+           
+                  <div class="for_input">
+                    <div class="input_user">
+                      <i class='bx bxs-lock-alt'></i><input type="password" name="pass2" autocomplete="new-password"
+                      class="textinput textInput form-control" onkeyup = password() required id="id_password2" placeholder="Password Confirmation" onchange="myFunction0">
+                      
+                      <span class="eye" onclick="myFunction1()">
+        
+                      
+                        <i id="hide12" class="bi bi-eye-fill"></i>
+                        <i id="hide22" class="bi bi-eye-slash-fill"></i>
+                      </span>
+                      
+                    </div>
+                   
+                    </div>
+                  </div>
+              </div>
+              <div class="form-group sign">
+                <input type="submit" class="btn btn-outline-info" id="signUp" value="sign up">
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+      <div class="right_panel">
+  
+  
+        <div class="border-top pt-3">
+          <small class="text-muted">
+            <h3> Already have an account ?</h3>
+            <p>
+              Welcome Back!! Sign In now!!
+            </p>
+            <div class="sign_in">
+              <a class="ml-2" href="../signin">Sign In</a>
+            </div>
+          </small>
+        </div>
+  
+  
+        <img src="{%static 'user/undraw_reading_time_re_phf7.svg'%}" alt="">
+  
+  
+      </div>
+  
+  
+    </div>
+  
+    <script>
+         function myFunction() {
+    var x = document.getElementById("id_password1");
+    var y = document.getElementById("hide1");
+    var z = document.getElementById("hide2");
+    if (x.type === "password") {
+      x.type = "text";
+      y.style.display = "block";
+      z.style.display = "none";
+    } else {
+      x.type = "password";
+      y.style.display = "none";
+      z.style.display = "block"
+    }
+  }
+     function myFunction1() {
+    var x1 = document.getElementById("id_password2");
+    var y1 = document.getElementById("hide12");
+    var z1 = document.getElementById("hide22");
+    if (x1.type === "password") {
+      x1.type = "text";
+      y1.style.display = "block";
+      z1.style.display = "none";
+    } else {
+      x1.type = "password";
+      y1.style.display = "none";
+      z1.style.display = "block"
+    }
+  }
+    </script>
+    
+  
+  
+  
+  </body>
+  
+  
+
+</html>

@@ -1,0 +1,36 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static 'user/payment.css'%}">
+    <title>Confirm Payment</title>
+    
+</head>
+<body>
+    <div class="container">
+        <div class="left_panel">
+                <h1> Confirm Payment of ₹500 </h1>
+            <form method = 'POST' class = "form">
+                {%csrf_token%}
+                <div class="select-option">
+                    <p>Time Slot:</p>
+                    <select name="slot">
+                        <option value="1" selected>6-7AM</option>
+                        <option value="2">7-8AM</option>
+                        <option value="3">8-9AM</option>
+                        <option value="4">5-6PM</option>
+                    </select>
+                </div>
+                <div class="pay"><input type="submit" value="Pay"></div> 
+            </form>
+            <a href = '../dashboard/' class = "pay" id = "cancel_pay"> Cancel payment</a>
+        </div>
+    </div>
+    <div class="right_panel">
+        <img src="{%static 'user/undraw_online_payments_re_y8f2.svg'%}" alt="">
+    </div>
+</body>
+</html>

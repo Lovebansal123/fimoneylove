@@ -1,40 +1,585 @@
 {%load static%}
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{%static 'user/dashboard.css'%}">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <title>Dashboard</title>
-</head>
-<body>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+     <!-- google font  -->
+     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+     <!-- stylesheet  -->
+     <link rel="stylesheet" href="{%static 'user/dashboard.css'%}">
+     <script src="https://kit.fontawesome.com/298c0f3c18.js" crossorigin="anonymous"></script>
+     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+     
+    <title>Yoga Classes</title>
+  </head>
+  <body>
+     <!--Navbar-->
+      <nav class="navbar navbar-expand-lg bg-color"id="myNavbar">
+          <div class="container">
+              <a href="#"class="navbar-brand">Yoga </a>
+              <button class="navbar-toggler"type="button" data-toggle="collapse" data-target="#myNav"aria-controls="myNav"aria-expanded="false"aria-label="Toggle navigation">
+                  <span></span>Menu
+              </button>
+              <div class="collapse navbar-collapse" id="myNav">
+                  <ul class="navbar-nav ml-auto">
+                      <li class="nav-item">
+                          <a href="#"class="nav-link">Home</a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="#sub-plans"class="nav-link">Plans</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#service-of-site"class="nav-link">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#yoga-assan"class="nav-link">Asnas</a>
+                    </li>
+                    {%if not request.user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="../signup" class="nav-link">Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="../signin"class="nav-link">Sign In</a>
+                    </li>
+                    {%else%}
+                    <li>
+                        <a href="../signout" class="nav-link">Log out</a>
+                    </li>
+                    {%endif%}
+                  </ul>
+              </div>
+          </div>
+      </nav>
+      <!--End of Navbar-->
+
+    <!--Hero Section-->
+    {%if not request.user.is_authenticated %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="Info-tech">
+                <h2 style="text-transform: capitalize">Hey, {{request.user.username}}</h2>
+                <h2>Yoga is the journey of the self, through the self, to the self.</h2>
+                <p>Start this beautiful journey with us!</p>
+                <div class="sign-up-in">
+                    <div class="sign-but"><a href="../signup">Sign Up</a></div>
+                    <span></span>
+                    <div class="sign-but"><a href="../signin">Sign In</a></div>
+                </div>
+            </div>
+            {%else%}
+            <div class="Info-tech">
+                <h2 style="text-transform: capitalize">Hey, {{request.user.username}}</h2>
+                <p style="font-size: 1.6rem;">Your plan ends in <span style="color: red;">0</span> days</p>
+                <div class="transaction-detail">
+                    <div class="transaction">
+                        <!-- <p>No previous transaction has been made.</p>
+                        <p>Previous transaction was done on</p>
+                        <span>01/10/22</span> -->
+                        {{Payment_string}}
+                    </div>
+                    <span class="vertical"></span>
+                    <div class="slot">
+                        {% if slot == -1 %}
+                        <p>Choose a plan and make payment</p>
+                        <div class="sign-but" style="text-align: center;"><a href="../payment">Make Payment</a></div>
+                        {%else%}
+                        <p>Your slot is:</p>
+                        <span style = "font-weight: bold; color: #12809b">{%if slot == 1%} 6-7AM {%endif%} {%if slot == 2%} 7-8AM {%endif%} {%if slot == 3%} 8-9AM {%endif%} {%if slot == 4%} 5-6PM {%endif%}</h2>
+                            {%endif%}</span>
+                    </div>
+                </div>
+            </div>
+            {%endif%}
+            <div class="col no-padding">
+                <div id="hero-slider"class="carousel slide" data-ride="carousel">
+                    <!------>
+                    <div class="carousel-inner">
+                        <div class="carousel-item slide-1 active">
+                        </div>
+                        <div class="carousel-item slide-2 ">
+                      </div>
+                      
+                      <div class="carousel-item slide-3 ">
+                      </div>
+                      
+                    </div>
+                    <a href="#hero-slider" class="carousel-control-prev"
+                    role="button" data-slide="prev">
+                    <i class='bx bxs-left-arrow'></i>
+                  
+                  </a>
+                  <a href="#hero-slider" class="carousel-control-next"
+                    role="button" data-slide="next">
+                    <i class='bx bxs-right-arrow' ></i>
+                  
+                  </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!---End of Hero Section-->
+
+
+<!---Pricing Section-->
+<section class="pricing-section pt-5" id="Sub-plans">
     <div class="container">
-    <h2>Hey, {{request.user.username}} !</h2>
-    <br><br>
-    <div class="box">
-        <div class="bill">
-            {{Payment_string}}  
+        <div class="section-title text-center" data-aos="fade-up" data-aos-duration="3000">
+            <h2>Different Slots</h2>
+            <p>Select from various slots and start your yoga classes today.</p>
         </div>
-        <div class="vertical-line"></div>
-        <div class="info">
+        <div class="row subscription-row" >
+            <div class="col-lg-3 col-sm-6" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="3200">
+                <div class="price-item beginner">
+                    <div class="price-top" id="price-top-3">
+                        <h4>Early Morning</h4>
+                    </div>
+                    <div class="price-sec">
+                        <h3>6-7</h3>
+                        <p>AM</p>
+                    </div>
+                    {% comment %} <ul>
+                        <li>50+ Yoga Asanas</li>
+                        <li>Live classes on weekends</li>
+                        <li>Daily reminders</li>
+                        <li>Healthy diet plans</li>
+                    </ul> {% endcomment %}
+                    <div class="subscription-pay-btn"><a href="../payment"class="site-btn sb-gradient">Make Payment</a></div>
+                </div>
+            </div>
             
-        {% if slot == -1 %}
-        <h2>Make Payment for selecting one slot.</h2>
-        <div class="make_payment">
-            <a href = "../payment">Make Payment</a>
+            <div class="col-lg-3 col-sm-6" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="3200">
+              <div class="price-item intermediate">
+                  <div class="price-top" id="price-top-2">
+                      <h4>Morning</h4>
+                  </div>
+                  <div class="price-sec">
+                      <h3>7-8</h3>
+                      <p>AM</p>
+                  </div>
+                  {% comment %} <ul>
+                      <li>One month free classes.</li>
+                      <li>50+ Yoga Asanas</li>
+                      <li>Live classes on weekends</li>
+                      <li>Healthy diet plans</li>
+                  </ul> {% endcomment %}
+                  <div class="subscription-pay-btn"><a href="../payment"class="site-btn sb-gradient">Make Payment</a></div>
+              </div>
+          </div>
+          
+          <div class="col-lg-3 col-sm-6" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="3200">
+              <div class="price-item advanced">
+                  <div class="price-top" id="price-top-4">
+                      <h4>Morning</h4>
+                  </div>
+                  <div class="price-sec">
+                      <h3>8-9</h3>
+                      <p>AM</p>
+                  </div>
+                  {% comment %} <ul>
+                      <li>100+ Yoga Asanas</li>
+                      <li>Daily interactions.</li>
+                      <li>Live classes on weekends</li>
+                      <li>Healthy diet plans</li>
+                  </ul> {% endcomment %}
+                  <div class="subscription-pay-btn"><a href="../payment"class="site-btn sb-gradient">Make Payment</a></div>
+              </div>
+          </div>
+          <div class="col-lg-3 col-sm-6" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="3200">
+            <div class="price-item advanced">
+                <div class="price-top" id="price-top-1">
+                    <h4>Evening</h4>
+                </div>
+                <div class="price-sec">
+                    <h3>5-6</h3>
+                    <p>PM</p>
+                </div>
+                {% comment %} <ul>
+                    <li>100+ Yoga Asanas</li>
+                    <li>Daily interactions.</li>
+                    <li>Live classes on weekends</li>
+                    <li>Healthy diet plans</li>
+                </ul> {% endcomment %}
+                <div class="subscription-pay-btn"><a href="../payment"class="site-btn sb-gradient">Make Payment</a></div>
+            </div>
         </div>
-        {%else%}
-        <h2>Your slot for Yoga classes is : <span style = "font-weight: bold; color: #12809b">{%if slot == 1%} 6-7AM {%endif%} {%if slot == 2%} 7-8AM {%endif%} {%if slot == 3%} 8-9AM {%endif%} {%if slot == 4%} 5-6PM {%endif%}</h2>
-            {%endif%}</span>
+          
+        </div>
     </div>
+</section>
+<!---End of the Pricing Section-->
+<!--About Section-->
+<section class="about-section">
+    <div class="container">
+        <div class=" section-title text-center" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="3200">
+            <h2> Benefits of yoga</h2>
+            <p>Yoga is an art and science of living.</p>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="about-img" data-aos="fade-right" data-aos-easing="linear" data-aos-duration="3200">
+                    <img src="{%static 'user/images/pexels-elina-fairytale-3822188.jpg'%}"class="img-fluid"alt="">
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left" data-aos-easing="linear" data-aos-duration="3200">
+                <div class="about-item">
+                    <div class="about-icon">
+                        <i class="fab fa-diaspora fa-2x"></i>
+                    </div>
+                    <div class="about-text">
+                        <h4>It helps in stress relief</h4>
+                        <p>Yoga reduces perceived stress and anxiety, which in turn reduces the physical effects of stress. </p>
+                    </div>
+                </div>
+              
+                <div class="about-item">
+                  <div class="about-icon">
+                      <i class="fas fa-cannabis fa-2x"></i>
+                  </div>
+                  <div class="about-text">
+                      <h4>It helps the body detoxify</h4>
+                      <p>Deep yogic breathing enhances the function of the lungs. </p>
+                  </div>
+              </div>
+            
+              <div class="about-item">
+                  <div class="about-icon">
+                      <i class="fab fa-d-and-d fa-2x"></i>
+                  </div>
+                  <div class="about-text">
+                      <h4>It will improve your posture</h4>
+                      <p>Better posture reduces anxiety, improves productivity, and helps you breath better</p>
+                  </div>
+              </div>
+             
+            </div>
+        </div>
     </div>
-<h3>You need to make payment again in <span style = "color: red;">{{diff}}</span> days.</h3>
-    <div class="sign-out"><a href="../signout"><i class='bx bx-log-out'></i></a></div>
+</section>
+<!---End of about Section-->
+    <!---Services Section-->
+    <section class="services section-bg pt-5" id="service-of-site">
+        <div class="container">
+            <div class=" section-title" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="3200">
+                <h2> Services</h2>
+                <p>We have lot of exciting things planned so let's get started.</p>
+            </div>
+            <div class="row" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="3200">
+                <div class="col-lg-4 col-md-6">
+                    <div class="icon-box">
+                        <div class="icon">
+                      <i class="fas fa-cannabis" style="color:#ff689b;"></i>
+                        </div>
+                        <h4 class="title">
+                            <a href="">Yoga Classes</a></h4>
+                            <p class="description">
+                               One to one interactive yoga classes with different yoga asans and their benefits on our body.
+                            </p>
+                        
+                    </div>
+                    
+                  
+                </div>
+                <div class="col-lg-4 col-md-6">
+                  <div class="icon-box">
+                      <div class="icon">
+                    <i class="fab fa-d-and-d" style="color:#e9bf06;"></i>
+                      </div>
+                      <h4 class="title">
+                          <a href="">Daily Reminders</a></h4>
+                          <p class="description">
+                             A daily reminder so that you never forget to do yoga and you can get some time to relax from your busy schedule.
+                          </p>
+                      
+                  </div>
+                  
+            </div>
+            <div class="col-lg-4 col-md-6">
+              <div class="icon-box">
+                  <div class="icon">
+                <i class="fab fa-envira" style="color:#3fcdc7;"></i>
+                  </div>
+                  <h4 class="title">
+                      <a href="">One to One Session</a></h4>
+                      <p class="description">
+                          One to one session in both online as well as physical mode will be organized according to your preference.
+                      </p>
+                  
+              </div>
+             
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <div class="icon-box">
+              <div class="icon">
+            <i class="fas fa-feather-alt" style="color:#41cf2e;"></i>
+              </div>
+              <h4 class="title">
+                  <a href="">Yoga asanas</a></h4>
+                  <p class="description">
+                      100+ yoga asans to make you fit, reduce your stress, anxiety which helps you and your mind to relax. 
+                  </p>
+              
+          </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+              <div class="icon-box">
+                  <div class="icon">
+                <i class="fas fa-leaf" style="color:#22ffed;"></i>
+                  </div>
+                  <h4 class="title">
+                      <a href="">Proper guidance</a></h4>
+                      <p class="description">
+                          Proper guidance will be provided so that you can do yoga correctly and it results in fruition.
+                      </p>
+                  
+              </div>
+              
+              </div>
+              <div class="col-lg-4 col-md-6">
+                  <div class="icon-box">
+                      <div class="icon">
+                    <i class="fas fa-life-ring" style="color:#4680ff;"></i>
+                      </div>
+                      <h4 class="title">
+                          <a href="">Health Diet</a></h4>
+                          <p class="description">
+                              A healthy diet is equally important and we will provide you the best diet plan according to your body needs.
+                          </p>
+                      
+                  </div>
+                  </div>
+    </section>
+    <!---End of the Services Section-->
+    
+
+<!-- Yoga Asanas of site  -->
+<section class="services-two" id="yoga-assan">
+    <h1>Yoga Asana</h1>
+    <p>Learn more about different yoga asans and there benefits for our body.</p>
+    <div class="info">
+        <div data-aos="fade-right" data-aos-duration="500" class="aos" >
+            <div class="sinser ">
+                <span></span>
+            <img src="{% static 'user/images/Virabhadrasana.jpg'%}" alt="Question">
+            <div class="desc">
+             
+                <p> Virabhadrasana
+                </p>
+            </div>
+
+        </div>
     </div>
-    <div class="right_panel">
-        <img src="{%static 'user/undraw_feeling_proud_qne1.svg'%}" alt="">
+    <div data-aos="fade-left" data-aos-duration="500" class="  aos">
+        <div class="sinser " >
+            <span></span>
+            <img src="{%static 'user/images/Bhujangasana.jpg'%}" alt="">
+            <div class="desc">
+              
+                <p>Bhujangasana
+                </p>
+            </div>
+
+        </div>
     </div>
-</body>
+    <div data-aos="fade-right" data-aos-duration="500" class="aos" >
+        <div class="sinser" >
+            <span></span>
+            <img src="{%static 'user/images/Padmasana.jpg'%}" alt="">
+            <div class="desc">
+               
+                <p> Padmasana
+                </p>
+            </div>
+            
+        </div>
+    </div>
+    <div data-aos="fade-left" data-aos-duration="500" class="aos">
+        <div class="sinser" >
+            <span></span>
+            <img src="{%static 'user/images/Vajrasana.jpg'%}" alt="">
+            <div class="desc">
+              
+                <p>Vajrasana
+                </p>
+                
+            </div>
+            
+        </div>
+    </div>
+    <div data-aos="fade-left" data-aos-duration="500" class="aos">
+        <div class="sinser" >
+            <span></span>
+            <img src="{%static 'user/images/Janu Shirasasana.jpg'%}" alt="">
+            <div class="desc">
+              
+                <p>Janu Shirasasana
+                </p>
+                
+            </div>
+            
+        </div>
+    </div>
+    <div data-aos="fade-left" data-aos-duration="500" class="aos">
+        <div class="sinser" >
+            <span></span>
+            <img src="{%static 'user/images/Trikonasana.jpg'%}" alt="">
+            <div class="desc">
+              
+                <p>Trikonasana
+                </p>
+                
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+</section>  
+<!-- footer  -->
+<footer>
+   <div class="container">
+       <div class="row" data-aos="fade-up" data-aos-easing="linear" data-aos-duration="3200">
+           <div class="col-sm-6 col-md-4">
+               <div>
+                   <div class="widget">
+                       <h5> About Yoga Life</h5>
+                       <p>True yoga is not about the shape of your body, but the shape of your life.</p>
+                   </div>
+               </div>
+               <div>
+                   <div class="widget">
+                       <h5> Information</h5>
+                       <ul>
+                           <li> <a href="#myNavbar">Home</a></li>
+                           <li> <a href="#Sub-plans">Subscription Plans</a></li>
+                           <li> <a href="#yoga-assan">Yoga Asanas</a></li>
+                           <li> <a href="#">Terms & Conditions</a></li>
+                       </ul>
+                   </div>
+               </div>
+           </div>
+           <div class="col-sm-6 col-md-4">
+               <div>
+                   <div class="widget">
+                       <h5> Yoga Life</h5>
+                       <ul>
+                           <li>
+                               <span class="fa-stack fa-lg">
+                                   <i class="fas fa-circle fa-stack-2x"></i>
+                                   <i class="fas fa-calendar-alt fa-stack-1x fa-inverse"></i>
+                               </span>
+                               Monday-Friday, 8am-8pm
+                           </li>
+                           <li>
+                               <span class="fa-stack fa-lg">
+                                  <i class="fas fa-circle fa-stack-2x"></i>
+                                  <i class="fas fa-phone fa-stack-1x fa-inverse"></i>
+
+                               </span>
+                               +55 1234 5678
+                           </li>
+                           <li>
+                              <span class="fa-stack fa-lg">
+                                 <i class="fas fa-circle fa-stack-2x"></i>
+                                 <i class="fas fa-envelope fa-stack-1x fa-inverse"></i>
+
+                              </span>
+                            Yogaasna@classes.com
+                          </li>
+                       </ul>
+                   </div>
+               </div>
+           </div>
+           <div class="col-sm-6 col-md-4">
+               <div>
+                   <div class="widget">
+                       <h5>Our Location</h5>
+                       <p>Jalandhar, Punjab</p>
+                   </div>
+               </div>
+               <div>
+                   <div class="widget">
+                       <h5>Follow Us</h5>
+                       <ul class="social-network">
+                           <li class="social-facebook">
+                               <a href="https://www.facebook.com/lavish.bansal.330">
+                                   <i class="fab fa-facebook"></i>
+                               </a>
+                           </li>
+                           <li class="social-twitter">
+                              <a href="https://github.com/Lovebansal123">
+                                  <i class="fab fa-github"></i>
+                              </a>
+                          </li>
+                          <li class="social-instagram">
+                              <a href="https://www.instagram.com/lavish.bansal.330/">
+                                  <i class="fab fa-instagram"></i>
+                              </a>
+                          </li>
+                       </ul>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </div>
+   <div class="sub-footer">
+       <div class="container">
+           <div class="row">
+               <div class="col-sm-6 col-md-6 col-lg-6">
+                   <div>
+                       <div class="text-left">
+                           <p>&copy; Copyright - Yoga. All rights reserved</p>
+                       </div>
+                   </div>
+                   </div>
+                   <div class="text-right">
+                       <div class="credits">
+                           Designed by Love Bansal
+                       </div>
+                   </div>
+           </div>
+       </div>
+   </div>
+   
+
+</footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            $('.sinser').on('mouseenter', function(e){
+                x = e.pageX - $(this).offset().left,
+                y = e.paheY - $(this).offset().top;
+                $(this).find('span').css({top:y, left:x})
+            })
+        })
+        $(document).ready(function(){
+            $('.sinser').on('mouseout', function(e){
+                x = e.pageX - $(this).offset().left,
+                y = e.paheY - $(this).offset().top;
+                $(this).find('span').css({top:y, left:x})
+            })
+        })
+
+    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+       AOS.init();
+     </script>
+  </body>
 </html>

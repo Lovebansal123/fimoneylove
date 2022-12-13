@@ -64,7 +64,7 @@ def signin(request):
 
 def dashboard(request):
     if not request.user.is_authenticated: 
-        return redirect('../signin')
+        return render(request,"user/dashboard.html")
     Payment_string = ""
     profile = Profile.objects.filter(user = request.user).first()
     if profile.last_date_of_payment == None or profile.last_date_of_payment == '':
